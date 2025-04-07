@@ -43,7 +43,7 @@ export default function PromotorDashboard() {
         <div className="container flex items-center">
           <Badge variant="outline" className="bg-white text-emerald-600 mr-3 uppercase px-2 py-1 text-xs font-bold">Breaking News</Badge>
           <div className="animate-marquee whitespace-nowrap">
-            Wichtig: Team-Meeting am Freitag um 14:00 Uhr • Neue Kaffeesorten ab nächster Woche • Erinnerung: Zeiterfassung nicht vergessen!
+            Wichtig: Team-Meeting am Freitag um 14:00 Uhr • Neue Premium-Kaffeesorten ab nächster Woche verfügbar • Erinnerung: Zeiterfassung nicht vergessen!
           </div>
         </div>
       </div>
@@ -155,7 +155,7 @@ export default function PromotorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Kommende Termine</CardTitle>
-                <CardDescription>Deine geplanten Promotion-Termine und Schulungen</CardDescription>
+                <CardDescription>Deine geplanten Promotion-Termine und Schulungen für die nächsten Wochen</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
