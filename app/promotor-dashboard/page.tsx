@@ -98,20 +98,6 @@ export default function PromotorDashboard() {
         </div>
         
         <Tabs defaultValue="dashboard" className="space-y-6" onValueChange={(newValue) => {
-          // Calculate the animation variables for the slide
-          const tabValues = ["dashboard", "einsatz", "equipment", "requests", "chats"];
-          const oldIndex = tabValues.indexOf(activeTab);
-          const newIndex = tabValues.indexOf(newValue);
-          
-          // Only set custom properties if both indexes are valid
-          if (oldIndex !== -1 && newIndex !== -1) {
-            const tabsList = document.querySelector('.tabs-list');
-            if (tabsList) {
-              // Cast to HTMLElement to fix TypeScript error
-              (tabsList as HTMLElement).style.setProperty('--active-tab-index', newIndex.toString());
-            }
-          }
-          
           setActiveTab(newValue);
         }}>
           <TabsList className="grid grid-cols-5 md:w-[500px] tabs-list">
@@ -333,8 +319,7 @@ export default function PromotorDashboard() {
   )
 }
 
-// Add this to the global CSS or create a new CSS file for these animations
-// This can be added using a style tag since this is a client component
+// Update the marqueeStyles string, modifying the tab-related CSS
 const marqueeStyles = `
 @keyframes marquee {
   0% { transform: translateX(0%); }
@@ -355,45 +340,38 @@ const marqueeStyles = `
 }
 
 /* Tab animations */
-@keyframes tab-slide {
-  0% { transform: translateX(var(--tab-slide-start)); }
-  70% { transform: translateX(calc(var(--tab-slide-end) + 5px)); }
-  85% { transform: translateX(calc(var(--tab-slide-end) - 3px)); }
-  100% { transform: translateX(var(--tab-slide-end)); }
-}
-
 .tabs-list {
   position: relative;
-  overflow: visible;
-}
-
-.tabs-list::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: calc(100% / 5); /* Adjust based on number of tabs */
-  z-index: 0;
-  border-radius: 0.5rem;
-  background: rgba(16, 185, 129, 0.15); /* Emerald with transparency */
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
-  transform: translateX(calc(100% * var(--active-tab-index, 0)));
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .tabs-trigger {
   position: relative;
   z-index: 1;
+  transition: all 0.3s ease;
   background: transparent !important;
   border: none !important;
-  transition: color 0.3s ease;
+}
+
+.tabs-trigger::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  backdrop-filter: blur(0px);
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: -1;
 }
 
 .tabs-trigger[data-state="active"] {
   color: rgb(5, 150, 105) !important;
   font-weight: 600;
+}
+
+.tabs-trigger[data-state="active"]::before {
+  background: rgba(16, 185, 129, 0.15);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
 }
 `;
 
