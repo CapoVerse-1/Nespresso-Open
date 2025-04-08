@@ -9,6 +9,37 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 
+// Add custom tab animation styles
+const tabAnimationStyles = `
+  /* Custom styling for the tab indicator */
+  [data-state="active"] {
+    position: relative;
+    overflow: hidden;
+  }
+
+  [data-state="active"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: rgba(16, 185, 129, 0.15); /* Emerald with opacity */
+    backdrop-filter: blur(8px);
+    border-radius: 0.5rem;
+  }
+
+  /* Animation for tab switching */
+  .tab-indicator {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border-radius: 0.5rem;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* Spring effect */
+    z-index: -2;
+  }
+`;
+
 export default function PromotorDashboard() {
   const [activeTab, setActiveTab] = useState("dashboard")
   
@@ -33,6 +64,7 @@ export default function PromotorDashboard() {
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-gray-50 relative">
       {/* Add the styles */}
       <style jsx global>{marqueeStyles}</style>
+      <style jsx global>{tabAnimationStyles}</style>
       
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
@@ -97,33 +129,21 @@ export default function PromotorDashboard() {
           </div>
         </div>
         
-        <Tabs defaultValue="dashboard" className="space-y-6" onValueChange={(newValue) => {
-          // Calculate the animation variables for the slide
-          const tabValues = ["dashboard", "einsatz", "equipment", "requests", "chats"];
-          const oldIndex = tabValues.indexOf(activeTab);
-          const newIndex = tabValues.indexOf(newValue);
-          
-          // Only set custom properties if both indexes are valid
-          if (oldIndex !== -1 && newIndex !== -1) {
-            const tabsList = document.querySelector('.tabs-list');
-            if (tabsList) {
-              // Cast to HTMLElement to fix TypeScript error
-              (tabsList as HTMLElement).style.setProperty('--active-tab-index', newIndex.toString());
-            }
-          }
-          
-          setActiveTab(newValue);
-        }}>
-          <div className="relative">
-            <TabsList className="grid grid-cols-5 md:w-[500px] tabs-list">
-              <TabsTrigger value="dashboard" className="tabs-trigger z-10">Dashboard</TabsTrigger>
-              <TabsTrigger value="einsatz" className="tabs-trigger z-10">Einsatz</TabsTrigger>
-              <TabsTrigger value="equipment" className="tabs-trigger z-10">Equipment</TabsTrigger>
-              <TabsTrigger value="requests" className="tabs-trigger z-10">Anträge</TabsTrigger>
-              <TabsTrigger value="chats" className="tabs-trigger z-10">Chats</TabsTrigger>
-            </TabsList>
-            <div className="tab-highlight-container"></div>
-          </div>
+        <Tabs defaultValue="dashboard" className="space-y-6" onValueChange={setActiveTab}>
+          <TabsList className="grid grid-cols-5 md:w-[500px] relative">
+            <span 
+              className="tab-indicator" 
+              style={{
+                width: `${100 / 5}%`,
+                transform: `translateX(${["dashboard", "einsatz", "equipment", "requests", "chats"].indexOf(activeTab) * 100}%)`
+              }}
+            ></span>
+            <TabsTrigger value="dashboard" className="relative z-10">Dashboard</TabsTrigger>
+            <TabsTrigger value="einsatz" className="relative z-10">Einsatz</TabsTrigger>
+            <TabsTrigger value="equipment" className="relative z-10">Equipment</TabsTrigger>
+            <TabsTrigger value="requests" className="relative z-10">Anträge</TabsTrigger>
+            <TabsTrigger value="chats" className="relative z-10">Chats</TabsTrigger>
+          </TabsList>
           
           <TabsContent value="dashboard" className="space-y-6">
             {/* Top Cards Row */}
@@ -336,7 +356,8 @@ export default function PromotorDashboard() {
   )
 }
 
-// Update the marqueeStyles string, modifying the tab-related CSS
+// Add this to the global CSS or create a new CSS file for these animations
+// This can be added using a style tag since this is a client component
 const marqueeStyles = `
 @keyframes marquee {
   0% { transform: translateX(0%); }
@@ -354,47 +375,6 @@ const marqueeStyles = `
 
 .animate-marquee2 {
   animation: marquee2 20s linear infinite;
-}
-
-/* Tab animations */
-.tabs-list {
-  position: relative;
-}
-
-.tabs-trigger {
-  position: relative;
-  transition: color 0.3s ease;
-  background: transparent !important;
-  border: none !important;
-}
-
-.tabs-trigger[data-state="active"] {
-  color: rgb(5, 150, 105) !important;
-  font-weight: 600;
-}
-
-.tab-highlight-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  pointer-events: none;
-}
-
-.tab-highlight-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: calc(100% / 5);
-  background: rgba(16, 185, 129, 0.15);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
-  border-radius: 0.5rem;
-  transform: translateX(calc(var(--active-tab-index, 0) * 100%));
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 `;
 
