@@ -98,11 +98,12 @@ export default function PromotorDashboard() {
         </div>
         
         <Tabs defaultValue="dashboard" className="space-y-6" onValueChange={setActiveTab}>
-          <TabsList className="grid grid-cols-4 md:w-[400px]">
+          <TabsList className="grid grid-cols-5 md:w-[500px]">
             <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
             <TabsTrigger value="einsatz">Einsatz</TabsTrigger>
             <TabsTrigger value="equipment">Equipment</TabsTrigger>
             <TabsTrigger value="requests">Anträge</TabsTrigger>
+            <TabsTrigger value="chats">Chats</TabsTrigger>
           </TabsList>
           
           <TabsContent value="dashboard" className="space-y-6">
@@ -279,7 +280,7 @@ export default function PromotorDashboard() {
           <TabsContent value="einsatz">
             <Card className="p-6">
               <h3 className="text-xl font-bold mb-4">Meine Einsätze</h3>
-              <p>Hier findest du alle Informationen zu deinen aktuellen und zukünftigen Einsätzen.</p>
+              <p>Hier findest du Details zu deinen aktuellen und kommenden Promotion-Einsätzen.</p>
             </Card>
           </TabsContent>
           
@@ -294,6 +295,13 @@ export default function PromotorDashboard() {
             <Card className="p-6">
               <h3 className="text-xl font-bold mb-4">Meine Anträge</h3>
               <p>Hier werden alle deine Anträge für Verfügbarkeiten, Urlaub und Zeitausgleich angezeigt.</p>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="chats">
+            <Card className="p-6">
+              <h3 className="text-xl font-bold mb-4">Meine Chats</h3>
+              <p>Hier kannst du mit anderen Team-Mitgliedern und SalesCrew kommunizieren.</p>
             </Card>
           </TabsContent>
         </Tabs>
