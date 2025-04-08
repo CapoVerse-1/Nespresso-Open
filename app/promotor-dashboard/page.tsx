@@ -172,7 +172,7 @@ export default function PromotorDashboard() {
               <CardContent>
                 <div className="space-y-4">
                   {upcomingEvents.map((event) => (
-                    <div key={event.id} className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0">
+                    <div key={event.id} className="flex items-center justify-between border-b pb-4 last:border-0 last:pb-0 event-item relative">
                       <div className="flex items-start gap-3">
                         <div className={`w-2 h-2 rounded-full mt-2 ${
                           event.status === 'confirmed' ? 'bg-emerald-500' : 
@@ -452,6 +452,51 @@ button:not([disabled]):hover {
   background-color: rgba(249, 250, 251, 0.8);
   transform: translateX(3px);
   transition: all 0.25s ease;
+}
+
+/* Improved upcoming events hover styling */
+.event-item {
+  margin: 0 -1.5rem;
+  padding: 1rem 1.5rem;
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease-out;
+}
+
+.event-item:hover {
+  background-color: rgba(249, 250, 251, 0.9);
+  border-left-color: rgba(5, 150, 105, 0.5);
+  transform: translateX(0);
+}
+
+.event-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background-color: rgba(229, 231, 235, 0.5);
+}
+
+.event-item:last-child::after {
+  display: none;
+}
+
+.event-item:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, rgba(5, 150, 105, 0.1), rgba(5, 150, 105, 0.5));
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Notification hover effect */
