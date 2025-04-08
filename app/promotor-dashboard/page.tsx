@@ -100,9 +100,9 @@ export default function PromotorDashboard() {
         <Tabs defaultValue="dashboard" className="space-y-6" onValueChange={setActiveTab}>
           <TabsList className="grid grid-cols-4 md:w-[400px]">
             <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-            <TabsTrigger value="calendar">Kalender</TabsTrigger>
-            <TabsTrigger value="requests">Anträge</TabsTrigger>
+            <TabsTrigger value="einsatz">Einsatz</TabsTrigger>
             <TabsTrigger value="equipment">Equipment</TabsTrigger>
+            <TabsTrigger value="requests">Anträge</TabsTrigger>
           </TabsList>
           
           <TabsContent value="dashboard" className="space-y-6">
@@ -276,17 +276,10 @@ export default function PromotorDashboard() {
             </Card>
           </TabsContent>
           
-          <TabsContent value="calendar">
+          <TabsContent value="einsatz">
             <Card className="p-6">
-              <h3 className="text-xl font-bold mb-4">Mein Kalender</h3>
-              <p>Hier wird der vollständige Kalender mit allen Terminen und Verfügbarkeiten angezeigt.</p>
-            </Card>
-          </TabsContent>
-          
-          <TabsContent value="requests">
-            <Card className="p-6">
-              <h3 className="text-xl font-bold mb-4">Meine Anträge</h3>
-              <p>Hier werden alle deine Anträge für Verfügbarkeiten, Urlaub und Zeitausgleich angezeigt.</p>
+              <h3 className="text-xl font-bold mb-4">Meine Einsätze</h3>
+              <p>Hier findest du alle Informationen zu deinen aktuellen und zukünftigen Einsätzen.</p>
             </Card>
           </TabsContent>
           
@@ -294,6 +287,13 @@ export default function PromotorDashboard() {
             <Card className="p-6">
               <h3 className="text-xl font-bold mb-4">Equipment anfragen</h3>
               <p>Hier kannst du Equipment für deine Promotion-Einsätze anfragen.</p>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="requests">
+            <Card className="p-6">
+              <h3 className="text-xl font-bold mb-4">Meine Anträge</h3>
+              <p>Hier werden alle deine Anträge für Verfügbarkeiten, Urlaub und Zeitausgleich angezeigt.</p>
             </Card>
           </TabsContent>
         </Tabs>
