@@ -98,13 +98,15 @@ export default function PromotorDashboard() {
         </div>
         
         <Tabs defaultValue="dashboard" className="tabs-container space-y-6" onValueChange={setActiveTab}>
-          <TabsList className="grid grid-cols-5 md:w-[500px] p-1 relative tab-animation-container">
-            <TabsTrigger value="dashboard" className="tab-trigger font-medium relative z-10">Dashboard</TabsTrigger>
-            <TabsTrigger value="einsatz" className="tab-trigger font-medium relative z-10">Einsatz</TabsTrigger>
-            <TabsTrigger value="equipment" className="tab-trigger font-medium relative z-10">Equipment</TabsTrigger>
-            <TabsTrigger value="requests" className="tab-trigger font-medium relative z-10">Anträge</TabsTrigger>
-            <TabsTrigger value="chats" className="tab-trigger font-medium relative z-10">Chats</TabsTrigger>
-          </TabsList>
+          <div className="flex justify-center w-full">
+            <TabsList className="grid grid-cols-5 md:w-[500px] p-1 relative tab-animation-container">
+              <TabsTrigger value="dashboard" className="tab-trigger font-medium relative z-10">Dashboard</TabsTrigger>
+              <TabsTrigger value="einsatz" className="tab-trigger font-medium relative z-10">Einsatz</TabsTrigger>
+              <TabsTrigger value="equipment" className="tab-trigger font-medium relative z-10">Equipment</TabsTrigger>
+              <TabsTrigger value="requests" className="tab-trigger font-medium relative z-10">Anträge</TabsTrigger>
+              <TabsTrigger value="chats" className="tab-trigger font-medium relative z-10">Chats</TabsTrigger>
+            </TabsList>
+          </div>
           
           <TabsContent value="dashboard" className="space-y-6">
             {/* Top Cards Row */}
@@ -354,6 +356,9 @@ const marqueeStyles = `
   padding: 0.5rem !important;
   backdrop-filter: blur(4px);
   position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 }
 
 [data-state="active"].tab-trigger::before {
