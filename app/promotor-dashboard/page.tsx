@@ -364,7 +364,7 @@ const marqueeStyles = `
   content: "";
   position: absolute;
   inset: 2px;
-  background: rgba(16, 185, 129, 0.18);
+  background: rgba(16, 185, 129, 0.35);
   filter: blur(12px);
   z-index: -1;
   animation: pulseGlow 3s infinite alternate;
@@ -410,7 +410,12 @@ const marqueeStyles = `
   transform-origin: center;
 }
 
+/* Apply animation to the background element only, not the text */
 .tab-animation-container [data-state="active"] {
+  position: relative;
+}
+
+.tab-animation-container [data-state="active"]::after {
   animation: tabBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
