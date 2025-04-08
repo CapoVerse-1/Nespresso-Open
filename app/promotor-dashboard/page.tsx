@@ -299,5 +299,4 @@ export default function PromotorDashboard() {
       </div>
     </div>
   )
-}
-
+} 
