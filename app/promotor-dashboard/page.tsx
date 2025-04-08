@@ -345,6 +345,17 @@ const marqueeStyles = `
   background-color: transparent;
 }
 
+/* Add a light background box to the tabs container */
+.tab-animation-container {
+  background-color: rgba(240, 249, 244, 0.8);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  padding: 0.5rem !important;
+  backdrop-filter: blur(4px);
+  position: relative;
+}
+
 [data-state="active"].tab-trigger::before {
   content: "";
   position: absolute;
