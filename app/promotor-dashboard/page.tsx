@@ -423,20 +423,33 @@ const marqueeStyles = `
   z-index: -2;
   transform-origin: left;
   animation: tabBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation-fill-mode: both;
+}
+
+/* Ensure animation resets when changing tabs */
+.tab-trigger {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 @keyframes tabBounce {
   0% {
-    transform: scaleX(0.7);
+    transform: scaleX(0.5) translateX(-10%);
+    opacity: 0.8;
   }
-  60% {
-    transform: scaleX(1.03);
+  40% {
+    transform: scaleX(1.08) translateX(2%);
+    opacity: 1;
   }
-  80% {
-    transform: scaleX(0.97);
+  70% {
+    transform: scaleX(0.96) translateX(0%);
+  }
+  85% {
+    transform: scaleX(1.02) translateX(0%);
   }
   100% {
-    transform: scaleX(1);
+    transform: scaleX(1) translateX(0%);
   }
 }
 
