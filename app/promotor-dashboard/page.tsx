@@ -98,15 +98,13 @@ export default function PromotorDashboard() {
         </div>
         
         <Tabs defaultValue="dashboard" className="tabs-container space-y-6" onValueChange={setActiveTab}>
-          <div className="flex justify-center w-full">
-            <TabsList className="grid grid-cols-5 md:w-[500px] p-1 relative tab-animation-container">
-              <TabsTrigger value="dashboard" className="tab-trigger font-medium relative z-10">Dashboard</TabsTrigger>
-              <TabsTrigger value="einsatz" className="tab-trigger font-medium relative z-10">Einsatz</TabsTrigger>
-              <TabsTrigger value="equipment" className="tab-trigger font-medium relative z-10">Equipment</TabsTrigger>
-              <TabsTrigger value="requests" className="tab-trigger font-medium relative z-10">Anträge</TabsTrigger>
-              <TabsTrigger value="chats" className="tab-trigger font-medium relative z-10">Chats</TabsTrigger>
-            </TabsList>
-          </div>
+          <TabsList className="grid grid-cols-5 md:w-[500px] p-1 relative tab-animation-container">
+            <TabsTrigger value="dashboard" className="tab-trigger font-medium relative z-10">Dashboard</TabsTrigger>
+            <TabsTrigger value="einsatz" className="tab-trigger font-medium relative z-10">Einsatz</TabsTrigger>
+            <TabsTrigger value="equipment" className="tab-trigger font-medium relative z-10">Equipment</TabsTrigger>
+            <TabsTrigger value="requests" className="tab-trigger font-medium relative z-10">Anträge</TabsTrigger>
+            <TabsTrigger value="chats" className="tab-trigger font-medium relative z-10">Chats</TabsTrigger>
+          </TabsList>
           
           <TabsContent value="dashboard" className="space-y-6">
             {/* Top Cards Row */}
@@ -353,12 +351,13 @@ const marqueeStyles = `
   border: 1px solid rgba(16, 185, 129, 0.1);
   border-radius: 0.75rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-  padding: 0.5rem !important;
+  padding: 0.25rem 0.5rem !important;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
   backdrop-filter: blur(4px);
   position: relative;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  align-items: center;
 }
 
 [data-state="active"].tab-trigger::before {
