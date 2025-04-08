@@ -101,13 +101,22 @@ export default function PromotorDashboard() {
       
       // Find active tab and position indicator
       const activeTab = document.querySelector('.tab-trigger[data-state="active"]');
-      if (activeTab && tabIndicator) {
+      if (activeTab && tabIndicator && tabsContainer) {
         const tabWidth = activeTab.getBoundingClientRect().width;
         const tabLeft = activeTab.getBoundingClientRect().left - tabsContainer.getBoundingClientRect().left;
         
         // Set indicator position and width
-        tabIndicator.style.width = `${tabWidth}px`;
-        tabIndicator.style.transform = `translateX(${tabLeft}px)`;
+        const indicator = tabIndicator as HTMLElement;
+        
+        // Add arrival class to trigger wobble animation only when arriving
+        indicator.classList.add('arriving');
+        indicator.style.width = `${tabWidth}px`;
+        indicator.style.transform = `translateX(${tabLeft}px)`;
+        
+        // Remove arrival class after animation completes to reset for next tab change
+        setTimeout(() => {
+          indicator.classList.remove('arriving');
+        }, 600); // Match transition duration
       }
     }
   };
@@ -599,7 +608,13 @@ const marqueeStyles = `
   background-color: rgb(125, 89, 55);
   border-radius: 9999px;
   z-index: 1;
-  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), width 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  /* Use a simple, smooth animation for departure */
+  transition: transform 0.3s ease-out, width 0.3s ease-out;
+}
+
+/* Apply bouncy animation only when arriving at new tab */
+.tab-sliding-indicator.arriving {
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .tab-trigger {
