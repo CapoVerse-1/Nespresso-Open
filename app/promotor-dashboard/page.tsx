@@ -33,6 +33,12 @@ export default function PromotorDashboard() {
   const setupCalendarHoverEffects = () => {
     // Only run in browser environment
     if (typeof window !== 'undefined') {
+      // First, remove any existing event listeners to prevent duplicates
+      document.querySelectorAll('.calendar-day.has-event').forEach(day => {
+        const clone = day.cloneNode(true);
+        day.parentNode?.replaceChild(clone, day);
+      });
+      
       const eventPlaceholder = document.querySelector('.event-placeholder');
       const eventDetails = document.querySelector('.event-details');
       const eventDate = document.querySelector('.event-date');
@@ -79,10 +85,15 @@ export default function PromotorDashboard() {
     }
   };
 
-  // Run setup on client side after render
+  // Run setup on client side after render and when tab changes
   useEffect(() => {
-    setupCalendarHoverEffects();
-  }, []);
+    // Add a small delay to ensure the DOM has updated
+    const timer = setTimeout(() => {
+      setupCalendarHoverEffects();
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [activeTab]);
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-gray-50 relative">
