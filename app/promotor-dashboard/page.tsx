@@ -52,14 +52,13 @@ export default function PromotorDashboard() {
           const location = day.getAttribute('data-event-location');
           
           // Update event details with null checks
-          if (eventDate) eventDate.textContent = date || '';
           if (eventTitle) eventTitle.textContent = title || '';
           if (eventTime) eventTime.textContent = time || '';
           if (eventLocation) eventLocation.textContent = location || '';
           
           // Set the indicator color with null check
           if (eventIndicator) {
-            eventIndicator.className = `event-indicator w-1 h-6 rounded-full self-start mt-1 ${type || 'emerald'}`;
+            eventIndicator.className = `event-indicator w-1 h-full self-stretch rounded-full ${type || 'emerald'}`;
           }
           
           // Show details, hide placeholder with null checks
@@ -321,10 +320,9 @@ export default function PromotorDashboard() {
                         TO-DOs werden hier dynamisch angezeigt wenn man über einen Tag mit einem To-do hovered
                       </div>
                       <div className="event-details hidden w-full">
-                        <div className="event-date text-xs font-medium text-gray-500 mb-1"></div>
                         <div className="event-info">
                           <div className="event-item flex items-center gap-2">
-                            <div className="event-indicator w-1 h-4 rounded-full"></div>
+                            <div className="event-indicator w-1 h-full self-stretch rounded-full"></div>
                             <div className="flex-1">
                               <h4 className="event-title font-medium text-sm"></h4>
                               <div className="flex items-center gap-1 text-xs text-muted-foreground">
