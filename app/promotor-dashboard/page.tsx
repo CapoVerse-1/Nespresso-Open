@@ -342,6 +342,7 @@ const marqueeStyles = `
 [data-state="active"].tab-trigger {
   position: relative;
   overflow: hidden;
+  background-color: transparent;
 }
 
 [data-state="active"].tab-trigger::before {
@@ -365,20 +366,30 @@ const marqueeStyles = `
   }
 }
 
-/* Glowing effect for active tab */
+/* Additional style to prevent white flash during transitions */
+.tab-trigger {
+  transition: all 0.2s ease;
+  position: relative;
+  background-color: transparent !important;
+}
+
+/* Create a translucent background for active tabs instead of the default white */
 [data-state="active"].tab-trigger::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(255, 255, 255, 0.65);
   z-index: -2;
+  transition: opacity 0.2s ease;
+}
+
+/* Ensure the tab list doesn't flash during transitions */
+[role="tablist"] {
+  position: relative;
+  background-color: white;
 }
 
 /* Custom animation for the tab indicator */
-[role="tablist"] {
-  position: relative;
-}
-
 [role="tablist"] [data-state="active"] {
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-origin: center;
@@ -404,10 +415,6 @@ const marqueeStyles = `
 }
 
 /* Additional polish */
-.tab-trigger {
-  transition: all 0.2s ease;
-}
-
 .tab-trigger:hover:not([data-state="active"]) {
   background-color: rgba(16, 185, 129, 0.05);
 }
