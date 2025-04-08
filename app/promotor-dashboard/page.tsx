@@ -485,15 +485,24 @@ button[variant="default"]:hover {
 }
 
 /* Card footer buttons hover effect - green hover for the three main statistic buttons */
+.card .CardFooter button.w-full:hover,
+.CardFooter button.w-full:hover,
+.card-footer button.w-full:hover,
 .card button.w-full:hover {
   background-color: rgba(5, 150, 105, 0.08);
   border-color: rgba(5, 150, 105, 0.5);
   color: rgb(5, 150, 105);
+  transform: translateY(-2px);
   transition: all 0.2s ease;
 }
 
+.card .CardFooter button.w-full:hover svg,
+.CardFooter button.w-full:hover svg,
+.card-footer button.w-full:hover svg,
 .card button.w-full:hover svg {
+  transform: scale(1.1);
   color: rgb(5, 150, 105);
+  transition: all 0.2s ease;
 }
 `;
 
