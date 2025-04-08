@@ -98,15 +98,32 @@ export default function PromotorDashboard() {
         </div>
         
         <Tabs defaultValue="dashboard" className="space-y-6" onValueChange={(newValue) => {
+          // Calculate the animation variables for the slide
+          const tabValues = ["dashboard", "einsatz", "equipment", "requests", "chats"];
+          const oldIndex = tabValues.indexOf(activeTab);
+          const newIndex = tabValues.indexOf(newValue);
+          
+          // Only set custom properties if both indexes are valid
+          if (oldIndex !== -1 && newIndex !== -1) {
+            const tabsList = document.querySelector('.tabs-list');
+            if (tabsList) {
+              // Cast to HTMLElement to fix TypeScript error
+              (tabsList as HTMLElement).style.setProperty('--active-tab-index', newIndex.toString());
+            }
+          }
+          
           setActiveTab(newValue);
         }}>
-          <TabsList className="grid grid-cols-5 md:w-[500px] tabs-list">
-            <TabsTrigger value="dashboard" className="tabs-trigger">Dashboard</TabsTrigger>
-            <TabsTrigger value="einsatz" className="tabs-trigger">Einsatz</TabsTrigger>
-            <TabsTrigger value="equipment" className="tabs-trigger">Equipment</TabsTrigger>
-            <TabsTrigger value="requests" className="tabs-trigger">Anträge</TabsTrigger>
-            <TabsTrigger value="chats" className="tabs-trigger">Chats</TabsTrigger>
-          </TabsList>
+          <div className="relative">
+            <TabsList className="grid grid-cols-5 md:w-[500px] tabs-list">
+              <TabsTrigger value="dashboard" className="tabs-trigger z-10">Dashboard</TabsTrigger>
+              <TabsTrigger value="einsatz" className="tabs-trigger z-10">Einsatz</TabsTrigger>
+              <TabsTrigger value="equipment" className="tabs-trigger z-10">Equipment</TabsTrigger>
+              <TabsTrigger value="requests" className="tabs-trigger z-10">Anträge</TabsTrigger>
+              <TabsTrigger value="chats" className="tabs-trigger z-10">Chats</TabsTrigger>
+            </TabsList>
+            <div className="tab-highlight-container"></div>
+          </div>
           
           <TabsContent value="dashboard" className="space-y-6">
             {/* Top Cards Row */}
@@ -346,21 +363,9 @@ const marqueeStyles = `
 
 .tabs-trigger {
   position: relative;
-  z-index: 1;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
   background: transparent !important;
   border: none !important;
-}
-
-.tabs-trigger::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 0.5rem;
-  background: transparent;
-  backdrop-filter: blur(0px);
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  z-index: -1;
 }
 
 .tabs-trigger[data-state="active"] {
@@ -368,10 +373,28 @@ const marqueeStyles = `
   font-weight: 600;
 }
 
-.tabs-trigger[data-state="active"]::before {
+.tab-highlight-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+
+.tab-highlight-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: calc(100% / 5);
   background: rgba(16, 185, 129, 0.15);
   backdrop-filter: blur(8px);
   box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+  border-radius: 0.5rem;
+  transform: translateX(calc(var(--active-tab-index, 0) * 100%));
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 `;
 
