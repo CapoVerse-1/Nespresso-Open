@@ -406,7 +406,7 @@ const marqueeStyles = `
 
 /* Custom animation for the tab indicator */
 [role="tablist"] [data-state="active"] {
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: color 0.2s ease;
   transform-origin: center;
 }
 
@@ -416,21 +416,27 @@ const marqueeStyles = `
 }
 
 .tab-animation-container [data-state="active"]::after {
-  animation: tabBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.65);
+  z-index: -2;
+  transform-origin: left;
+  animation: tabBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes tabBounce {
   0% {
-    transform: translateX(-30%);
+    transform: scaleX(0.7);
   }
   60% {
-    transform: translateX(3%);
+    transform: scaleX(1.03);
   }
   80% {
-    transform: translateX(-1%);
+    transform: scaleX(0.97);
   }
   100% {
-    transform: translateX(0);
+    transform: scaleX(1);
   }
 }
 
