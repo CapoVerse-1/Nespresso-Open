@@ -64,7 +64,7 @@ export default function PromotorDashboard() {
           
           // Set the indicator color with null check
           if (eventIndicator) {
-            eventIndicator.className = `event-indicator w-1 h-full self-stretch rounded-full ${type || 'emerald'}`;
+            eventIndicator.className = `event-indicator w-1 h-full self-stretch rounded-full ${type || 'coffee'}`;
           }
           
           // Show details, hide placeholder with null checks
@@ -85,11 +85,39 @@ export default function PromotorDashboard() {
     }
   };
 
+  // Function to set up sliding tab indicator
+  const setupTabIndicator = () => {
+    if (typeof window !== 'undefined') {
+      // Create or get the tab indicator element
+      let tabIndicator = document.querySelector('.tab-sliding-indicator');
+      const tabsContainer = document.querySelector('.tab-animation-container');
+      
+      if (!tabIndicator && tabsContainer) {
+        // Create indicator if it doesn't exist
+        tabIndicator = document.createElement('span');
+        tabIndicator.className = 'tab-sliding-indicator';
+        tabsContainer.appendChild(tabIndicator);
+      }
+      
+      // Find active tab and position indicator
+      const activeTab = document.querySelector('.tab-trigger[data-state="active"]');
+      if (activeTab && tabIndicator) {
+        const tabWidth = activeTab.getBoundingClientRect().width;
+        const tabLeft = activeTab.getBoundingClientRect().left - tabsContainer.getBoundingClientRect().left;
+        
+        // Set indicator position and width
+        tabIndicator.style.width = `${tabWidth}px`;
+        tabIndicator.style.transform = `translateX(${tabLeft}px)`;
+      }
+    }
+  };
+
   // Run setup on client side after render and when tab changes
   useEffect(() => {
     // Add a small delay to ensure the DOM has updated
     const timer = setTimeout(() => {
       setupCalendarHoverEffects();
+      setupTabIndicator();
     }, 100);
     
     return () => clearTimeout(timer);
@@ -563,6 +591,17 @@ const marqueeStyles = `
   position: relative;
 }
 
+/* Style for the JavaScript-created sliding indicator */
+.tab-sliding-indicator {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background-color: rgb(125, 89, 55);
+  border-radius: 9999px;
+  z-index: 1;
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), width 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
 .tab-trigger {
   background: transparent !important;
   font-weight: 500;
@@ -576,23 +615,9 @@ const marqueeStyles = `
   font-weight: 600;
 }
 
+/* Hide the default indicator since we're using our custom one */
 .tab-trigger[data-state="active"]::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -0.5rem;
-  height: 3px;
-  background-color: rgb(125, 89, 55);
-  border-radius: 9999px;
-  transform: scaleX(0.6);
-  opacity: 0;
-  transition: all 0.2s ease;
-}
-
-.tab-trigger[data-state="active"]::before {
-  opacity: 1;
-  transform: scaleX(0.6);
+  content: none;
 }
 
 .termine-tabs .termine-tab {
