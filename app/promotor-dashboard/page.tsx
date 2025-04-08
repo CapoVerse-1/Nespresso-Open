@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Coffee, Bell, Calendar, FileText, Briefcase, MessageSquare, Package, Clock, User, Video, Send } from "lucide-react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -28,6 +28,62 @@ export default function PromotorDashboard() {
   const notes = [
     { id: 1, title: "Hinweis zur Nespresso Promotion", content: "Bitte alle neuen Materialien für die Vertolino-Reihe mitnehmen. Neue Flyer sind heute eingetroffen.", from: "Julia (SalesCrew)", date: "Heute" },
   ]
+
+  // Function to setup calendar day hover effects
+  const setupCalendarHoverEffects = () => {
+    // Only run in browser environment
+    if (typeof window !== 'undefined') {
+      const eventPlaceholder = document.querySelector('.event-placeholder');
+      const eventDetails = document.querySelector('.event-details');
+      const eventDate = document.querySelector('.event-date');
+      const eventTitle = document.querySelector('.event-title');
+      const eventTime = document.querySelector('.event-time');
+      const eventLocation = document.querySelector('.event-location');
+      const eventIndicator = document.querySelector('.event-indicator');
+      
+      // Add event listeners to all days with events
+      document.querySelectorAll('.calendar-day.has-event').forEach(day => {
+        day.addEventListener('mouseenter', () => {
+          // Get event data from data attributes
+          const date = day.getAttribute('data-event-date');
+          const type = day.getAttribute('data-event-type');
+          const title = day.getAttribute('data-event-title');
+          const time = day.getAttribute('data-event-time');
+          const location = day.getAttribute('data-event-location');
+          
+          // Update event details with null checks
+          if (eventDate) eventDate.textContent = date || '';
+          if (eventTitle) eventTitle.textContent = title || '';
+          if (eventTime) eventTime.textContent = time || '';
+          if (eventLocation) eventLocation.textContent = location || '';
+          
+          // Set the indicator color with null check
+          if (eventIndicator) {
+            eventIndicator.className = `event-indicator w-1 h-6 rounded-full self-start mt-1 ${type || 'emerald'}`;
+          }
+          
+          // Show details, hide placeholder with null checks
+          if (eventPlaceholder) eventPlaceholder.classList.add('hidden');
+          if (eventDetails) eventDetails.classList.remove('hidden');
+        });
+        
+        day.addEventListener('mouseleave', () => {
+          // Hide details, show placeholder after a short delay
+          setTimeout(() => {
+            if (!document.querySelector('.calendar-day.has-event:hover')) {
+              if (eventPlaceholder) eventPlaceholder.classList.remove('hidden');
+              if (eventDetails) eventDetails.classList.add('hidden');
+            }
+          }, 100);
+        });
+      });
+    }
+  };
+
+  // Run setup on client side after render
+  useEffect(() => {
+    setupCalendarHoverEffects();
+  }, []);
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-gray-50 relative">
@@ -290,16 +346,16 @@ export default function PromotorDashboard() {
                         
                         {/* Week 3 */}
                         <div className="calendar-day">14</div>
-                        <div className="calendar-day has-event">15</div>
+                        <div className="calendar-day has-event" data-event-date="15. April 2025" data-event-type="emerald" data-event-title="Nespresso Promotion" data-event-time="09:00-17:00" data-event-location="Mariahilfer Str.">15</div>
                         <div className="calendar-day">16</div>
                         <div className="calendar-day">17</div>
-                        <div className="calendar-day has-event">18</div>
+                        <div className="calendar-day has-event" data-event-date="18. April 2025" data-event-type="blue" data-event-title="Barista Training" data-event-time="14:00-16:00" data-event-location="Online Zoom">18</div>
                         <div className="calendar-day weekend">19</div>
                         <div className="calendar-day weekend">20</div>
                         
                         {/* Week 4 */}
                         <div className="calendar-day">21</div>
-                        <div className="calendar-day has-event">22</div>
+                        <div className="calendar-day has-event" data-event-date="22. April 2025" data-event-type="amber" data-event-title="Coffee Tasting Event" data-event-time="11:00-15:00" data-event-location="Stephansplatz">22</div>
                         <div className="calendar-day">23</div>
                         <div className="calendar-day">24</div>
                         <div className="calendar-day">25</div>
@@ -317,13 +373,26 @@ export default function PromotorDashboard() {
                       </div>
                     </div>
                     
-                    {/* Hover Tooltip for Events (will appear when hovering over days with events) */}
-                    <div className="event-tooltip bg-white p-3 rounded-lg shadow-lg border border-gray-100 hidden">
-                      <div className="text-sm font-medium">15. April 2025</div>
-                      <div className="mt-2 space-y-2">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                          <span className="text-xs">Nespresso Promotion (09:00-17:00)</span>
+                    {/* Event Preview Panel - Modern and Minimalistic */}
+                    <div className="event-preview-panel mt-6 border border-gray-100 rounded-lg p-4 min-h-[100px] flex items-center justify-center text-center transition-all duration-300">
+                      <div className="event-placeholder text-muted-foreground text-sm">
+                        TO-DOs werden hier dynamisch angezeigt wenn man über einen Tag mit einem To-do hovered
+                      </div>
+                      <div className="event-details hidden">
+                        <div className="event-date text-sm font-medium text-gray-500 mb-2"></div>
+                        <div className="event-info space-y-2">
+                          <div className="event-item flex items-start gap-3">
+                            <div className="event-indicator w-1 h-6 rounded-full self-start mt-1"></div>
+                            <div>
+                              <h4 className="event-title font-medium text-base"></h4>
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                                <span className="event-time"></span>
+                                {/* Dot divider */}
+                                <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+                                <span className="event-location"></span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -797,6 +866,59 @@ button[variant="default"]:hover {
 .event-tooltip:hover {
   opacity: 1;
   display: block;
+}
+
+/* Event preview panel styling */
+.event-preview-panel {
+  background-color: rgba(250, 250, 250, 0.7);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.calendar-day.has-event {
+  position: relative;
+  z-index: 1;
+}
+
+.calendar-day.has-event::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(5, 150, 105, 0.06);
+  border-radius: 0.375rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: -1;
+}
+
+.calendar-day.has-event:hover::before {
+  opacity: 1;
+}
+
+.calendar-day.has-event:hover {
+  color: rgb(5, 150, 105);
+  font-weight: 500;
+}
+
+.calendar-day.has-event::after {
+  bottom: 10%;
+}
+
+/* Event indicators by type */
+.event-indicator.emerald {
+  background-color: rgb(5, 150, 105);
+}
+
+.event-indicator.blue {
+  background-color: rgb(59, 130, 246);
+}
+
+.event-indicator.amber {
+  background-color: rgb(245, 158, 11);
+}
+
+.event-indicator.purple {
+  background-color: rgb(139, 92, 246);
 }
 `;
 
