@@ -96,21 +96,21 @@ export default function PromotorDashboard() {
   }, [activeTab]);
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-gray-50 relative">
+    <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-coffee-50 relative">
       {/* Add the styles */}
       <style jsx global>{marqueeStyles}</style>
       
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-emerald-100 opacity-30 blur-3xl"></div>
-        <div className="absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-teal-100 opacity-30 blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-emerald-50 opacity-30 blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-coffee-100 opacity-30 blur-3xl"></div>
+        <div className="absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-mocha-100 opacity-30 blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-coffee-50 opacity-30 blur-3xl"></div>
       </div>
       
       {/* Breaking News Banner (conditionally displayed) */}
-      <div className="bg-emerald-600 text-white py-2 overflow-hidden">
+      <div className="bg-coffee-700 text-white py-2 overflow-hidden">
         <div className="container flex items-center">
-          <Badge variant="outline" className="bg-white text-emerald-600 mr-3 uppercase px-2 py-1 text-xs font-bold shrink-0">Breaking News</Badge>
+          <Badge variant="outline" className="bg-white text-coffee-700 mr-3 uppercase px-2 py-1 text-xs font-bold shrink-0">Breaking News</Badge>
           <div className="overflow-hidden relative w-full">
             <div className="whitespace-nowrap inline-block animate-marquee">
               Wichtig: Team-Meeting am Freitag um 14:00 Uhr • Neue Premium-Kaffeesorten ab nächster Woche verfügbar • Erinnerung: Zeiterfassung nicht vergessen! &nbsp;&nbsp;&nbsp;
@@ -126,7 +126,7 @@ export default function PromotorDashboard() {
       <header className="bg-white border-b shadow-sm sticky top-0 z-30">
         <div className="container flex h-16 items-center justify-between px-4 md:px-6">
           <Link href="/" className="flex items-center gap-2">
-            <Coffee className="h-6 w-6 text-emerald-600" />
+            <Coffee className="h-6 w-6" style={{ color: 'rgba(5, 150, 105, 0.8)' }} />
             <span className="text-lg font-bold tracking-tight">Nespresso</span>
           </Link>
           <div className="flex items-center gap-4">
@@ -139,7 +139,7 @@ export default function PromotorDashboard() {
             <div className="flex items-center gap-2">
               <Avatar>
                 <AvatarImage src="/placeholder.svg" alt="User" />
-                <AvatarFallback className="bg-emerald-100 text-emerald-800">MP</AvatarFallback>
+                <AvatarFallback className="bg-coffee-100 text-coffee-800">MP</AvatarFallback>
               </Avatar>
               <span className="text-sm font-medium hidden md:inline-block">Max Promotor</span>
             </div>
@@ -216,7 +216,7 @@ export default function PromotorDashboard() {
                   <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
                     <div className="h-2.5 rounded-full" style={{ 
                       width: "40%", 
-                      background: "linear-gradient(to right, rgba(167, 243, 208, 1), rgba(5, 150, 105, 1))" 
+                      background: "linear-gradient(to right, rgba(224, 209, 185, 1), rgba(125, 89, 55, 1))" 
                     }}></div>
                   </div>
                 </CardContent>
@@ -248,13 +248,13 @@ export default function PromotorDashboard() {
                       <div className="termine-item">
                         <div className="flex justify-between items-start">
                           <div className="flex gap-3">
-                            <div className="w-1 self-stretch rounded-full bg-emerald-500"></div>
+                            <div className="w-1 self-stretch rounded-full bg-coffee-600"></div>
                             <div>
                               <h4 className="font-medium">Nespresso Promotion</h4>
                               <p className="text-sm text-muted-foreground">09:00 - 17:00 • Mariahilfer Str.</p>
                             </div>
                           </div>
-                          <Badge variant="default" className="bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/20 border-0">
+                          <Badge variant="default" className="bg-coffee-500/10 text-coffee-700 hover:bg-coffee-500/20 border-0">
                             Einsatz
                           </Badge>
                         </div>
@@ -378,7 +378,7 @@ export default function PromotorDashboard() {
                         
                         {/* Week 3 */}
                         <div className="calendar-day">14</div>
-                        <div className="calendar-day has-event" data-event-date="15. April 2025" data-event-type="emerald" data-event-title="Nespresso Promotion" data-event-time="09:00-17:00" data-event-location="Mariahilfer Str.">15</div>
+                        <div className="calendar-day has-event" data-event-date="15. April 2025" data-event-type="coffee" data-event-title="Nespresso Promotion" data-event-time="09:00-17:00" data-event-location="Mariahilfer Str.">15</div>
                         <div className="calendar-day">16</div>
                         <div className="calendar-day">17</div>
                         <div className="calendar-day has-event" data-event-date="18. April 2025" data-event-type="blue" data-event-title="Barista Training" data-event-time="14:00-16:00" data-event-location="Online Zoom">18</div>
@@ -534,238 +534,114 @@ export default function PromotorDashboard() {
 // This can be added using a style tag since this is a client component
 const marqueeStyles = `
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 @keyframes marquee2 {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(0%); }
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .animate-marquee {
-  animation: marquee 20s linear infinite;
+  animation: marquee 25s linear infinite;
 }
 
 .animate-marquee2 {
-  animation: marquee2 20s linear infinite;
+  animation: marquee2 25s linear infinite;
 }
 
-/* Custom tab indicator animation styles */
-[data-state="active"].tab-trigger {
+.tabs-container .tab-animation-container {
   position: relative;
-  background-color: transparent !important;
-  z-index: 1;
 }
 
-/* Add a light background box to the tabs container */
-.tab-animation-container {
-  background-color: rgba(240, 249, 244, 0.8);
-  border: 1px solid rgba(16, 185, 129, 0.1);
-  border-radius: 0.75rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-  padding: 0.25rem 0.5rem !important;
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-  backdrop-filter: blur(4px);
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-/* Active tab green indicator styles */
-[data-state="active"].tab-trigger::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: rgba(5, 150, 105, 0.2); /* Darker green with transparency */
-  border-radius: 0.5rem;
-  z-index: -1;
-  transform-origin: left center;
-  animation: tabIndicatorBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Basic tab styles */
 .tab-trigger {
+  background: transparent !important;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  position: relative;
   transition: color 0.2s ease;
-  background-color: transparent !important; 
-  position: relative;
-  z-index: 2;
 }
 
-/* Tab indicator bounce animation */
-@keyframes tabIndicatorBounce {
-  0% {
-    transform: scaleX(0.7) scaleY(0.9);
-    opacity: 0.7;
-  }
-  60% {
-    transform: scaleX(1.04) scaleY(1.01);
-    opacity: 1;
-  }
-  80% {
-    transform: scaleX(0.98) scaleY(1);
-  }
-  100% {
-    transform: scaleX(1) scaleY(1);
-  }
+.tab-trigger[data-state="active"] {
+  color: rgb(62, 46, 30);
+  font-weight: 600;
 }
 
-/* Additional polish */
-.tab-trigger:hover:not([data-state="active"]) {
-  background-color: rgba(5, 150, 105, 0.05);
-}
-
-/* Tab list styles */
-[role="tablist"] {
-  position: relative;
-  overflow: visible;
-}
-
-/* Simplify tab content transitions */
-.tabs-container [data-state] {
-  transition: opacity 0.2s ease;
-}
-
-/* Elegant hover effects for cards */
-.card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-}
-
-/* Hover effect for buttons */
-button:not([disabled]):hover {
-  filter: brightness(1.05);
-  transform: translateY(-1px);
-  transition: all 0.2s ease;
-}
-
-/* Quick actions hover effect */
-.grid button.h-auto:hover {
-  background-color: rgba(16, 185, 129, 0.08);
-  transform: translateY(-2px);
-  transition: all 0.2s ease;
-}
-
-.grid button.h-auto:hover svg {
-  transform: scale(1.1);
-  color: rgb(5, 150, 105);
-  transition: all 0.2s ease;
-}
-
-/* Hover effect for event items */
-.flex.items-center.justify-between:hover {
-  background-color: rgba(249, 250, 251, 0.8);
-  transform: translateX(3px);
-  transition: all 0.25s ease;
-}
-
-/* Improved upcoming events hover styling */
-.event-item {
-  margin: 0 -1.5rem;
-  padding: 1rem 1.5rem;
-  border-left: 3px solid transparent;
-  transition: all 0.2s ease-out;
-}
-
-.event-item:hover {
-  background-color: rgba(249, 250, 251, 0.9);
-  border-left-color: rgba(5, 150, 105, 0.5);
-  transform: translateX(0);
-}
-
-.event-item::after {
+.tab-trigger[data-state="active"]::before {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: 1.5rem;
-  right: 1.5rem;
-  height: 1px;
-  background-color: rgba(229, 231, 235, 0.5);
-}
-
-.event-item:last-child::after {
-  display: none;
-}
-
-.event-item:hover::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
   left: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, rgba(5, 150, 105, 0.1), rgba(5, 150, 105, 0.5));
+  right: 0;
+  bottom: -0.5rem;
+  height: 3px;
+  background-color: rgb(125, 89, 55);
+  border-radius: 9999px;
+  transform: scaleX(0.6);
   opacity: 0;
-  animation: fadeIn 0.3s forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Notification hover effect */
-.flex.gap-4.items-start:hover {
-  background-color: rgba(249, 250, 251, 0.5);
-  padding: 0.5rem;
-  margin: -0.5rem;
-  border-radius: 0.5rem;
   transition: all 0.2s ease;
 }
 
-/* Team notes hover effect */
-.rounded-lg.bg-gray-50:hover {
-  background-color: rgba(243, 244, 246, 0.8);
-  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+.tab-trigger[data-state="active"]::before {
+  opacity: 1;
+  transform: scaleX(0.6);
+}
+
+.termine-tabs .termine-tab {
+  position: relative;
+  transition: color 0.2s ease;
+  font-weight: 400;
+}
+
+.termine-tabs .termine-tab::after {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: -2px;
+  height: 2px;
+  background-color: rgb(125, 89, 55);
+  transform: scaleX(0);
+  opacity: 0;
   transition: all 0.2s ease;
 }
 
-/* AI Assistant button hover effect */
-.fixed.bottom-6.right-6 button:hover {
-  background-color: rgb(5, 150, 105);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+.termine-tabs .termine-tab.active {
+  font-weight: 500;
+  color: rgb(62, 46, 30);
 }
 
-/* Calendar hover effect */
-button[variant="default"]:hover {
-  box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+.termine-tabs .termine-tab.active::after {
+  transform: scaleX(1);
+  opacity: 1;
 }
 
-/* Card footer buttons hover effect - green hover for the three main statistic buttons */
-.card-stat-button:hover {
-  background-color: rgba(5, 150, 105, 0.08) !important;
-  border-color: rgba(5, 150, 105, 0.5) !important;
-  color: rgb(5, 150, 105) !important;
-  transform: translateY(-2px);
-  transition: all 0.2s ease;
+.termine-tabs .termine-tab:hover {
+  color: rgb(125, 89, 55);
 }
 
-.card-stat-button:hover svg {
-  transform: scale(1.1);
-  color: rgb(5, 150, 105) !important;
-  transition: all 0.2s ease;
+.calendar-container {
+  position: relative;
 }
 
-/* Calendar styling */
 .calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-  margin-bottom: 8px;
+  margin-bottom: 0.75rem;
 }
 
 .calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
+  gap: 0.25rem 0.5rem;
 }
 
 .calendar-day {
@@ -774,77 +650,56 @@ button[variant="default"]:hover {
   align-items: center;
   justify-content: center;
   font-size: 0.875rem;
-  cursor: pointer;
   border-radius: 0.375rem;
-  color: #374151;
+  transition: all 0.15s ease;
+  cursor: default;
   position: relative;
-  transition: all 0.2s ease;
 }
 
-.calendar-day:hover {
-  background-color: rgba(5, 150, 105, 0.08);
-}
-
-.calendar-day.prev-month, 
+.calendar-day.prev-month,
 .calendar-day.next-month {
-  color: #9CA3AF;
+  color: rgb(163, 163, 163);
 }
 
 .calendar-day.weekend {
-  color: #6B7280;
+  color: rgb(125, 89, 55);
 }
 
-.calendar-day.has-event::after {
+.calendar-day::after {
   content: "";
   position: absolute;
   bottom: 15%;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background-color: rgb(5, 150, 105);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 9999px;
+  background-color: transparent;
 }
 
-.calendar-nav:hover {
-  background-color: rgba(5, 150, 105, 0.08);
-  color: rgb(5, 150, 105);
-}
-
-/* Termine Section Styling */
-.termine-tabs {
-  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
-  padding-bottom: 0.5rem;
-}
-
-.termine-tab {
-  border-radius: 0.25rem;
-  font-weight: 500;
-}
-
-.termine-tab.active {
-  background-color: rgba(5, 150, 105, 0.08);
-  color: rgb(5, 150, 105);
-}
-
-.termine-tab:hover:not(.active) {
-  background-color: rgba(5, 150, 105, 0.04);
+.calendar-day.has-event {
+  cursor: pointer;
 }
 
 .termine-item {
   padding: 0.75rem;
   border-radius: 0.5rem;
-  transition: all 0.2s ease;
-  border-left: 3px solid transparent;
+  transition: background-color 0.15s ease;
 }
 
 .termine-item:hover {
-  background-color: rgba(249, 250, 251, 0.9);
-  transform: translateX(2px);
+  background-color: rgb(250, 250, 250);
 }
 
-/* Custom scrollbar for termine list */
+.card-stat-button:hover {
+  background-color: rgb(246, 241, 235);
+  border-color: rgb(179, 139, 88);
+  color: rgb(125, 89, 55);
+}
+
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(229, 231, 235, 0.5) transparent;
+  scrollbar-color: rgba(203, 213, 225, 0.4) transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -856,8 +711,13 @@ button[variant="default"]:hover {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(229, 231, 235, 0.5);
-  border-radius: 4px;
+  background-color: rgba(203, 213, 225, 0.4);
+  border-radius: 9999px;
+}
+
+.calendar-nav:hover {
+  background-color: rgb(246, 241, 235);
+  color: rgb(125, 89, 55);
 }
 
 /* Event tooltip styling */
@@ -899,7 +759,7 @@ button[variant="default"]:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(5, 150, 105, 0.06);
+  background-color: rgba(125, 89, 55, 0.06);
   border-radius: 0.375rem;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -911,7 +771,7 @@ button[variant="default"]:hover {
 }
 
 .calendar-day.has-event:hover {
-  color: rgb(5, 150, 105);
+  color: rgb(125, 89, 55);
   font-weight: 500;
 }
 
@@ -920,8 +780,8 @@ button[variant="default"]:hover {
 }
 
 /* Event indicators by type */
-.event-indicator.emerald {
-  background-color: rgb(5, 150, 105);
+.event-indicator.coffee {
+  background-color: rgb(125, 89, 55);
 }
 
 .event-indicator.blue {
