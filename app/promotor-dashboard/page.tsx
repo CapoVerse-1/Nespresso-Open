@@ -316,20 +316,19 @@ export default function PromotorDashboard() {
                   </CardHeader>
                   <CardContent className="pb-6">
                     {/* Event Preview Panel */}
-                    <div className="event-preview-panel mb-6 border border-gray-100 rounded-lg p-4 min-h-[80px] flex items-center justify-center text-center transition-all duration-300">
+                    <div className="event-preview-panel mb-6 border border-gray-100 rounded-lg p-4 h-[70px] flex items-center justify-center text-center">
                       <div className="event-placeholder text-muted-foreground text-sm">
                         TO-DOs werden hier dynamisch angezeigt wenn man über einen Tag mit einem To-do hovered
                       </div>
-                      <div className="event-details hidden">
-                        <div className="event-date text-sm font-medium text-gray-500 mb-2"></div>
-                        <div className="event-info space-y-2">
-                          <div className="event-item flex items-start gap-3">
-                            <div className="event-indicator w-1 h-6 rounded-full self-start mt-1"></div>
-                            <div>
-                              <h4 className="event-title font-medium text-base"></h4>
-                              <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                      <div className="event-details hidden w-full">
+                        <div className="event-date text-xs font-medium text-gray-500 mb-1"></div>
+                        <div className="event-info">
+                          <div className="event-item flex items-center gap-2">
+                            <div className="event-indicator w-1 h-4 rounded-full"></div>
+                            <div className="flex-1">
+                              <h4 className="event-title font-medium text-sm"></h4>
+                              <div className="flex items-center gap-1 text-xs text-muted-foreground">
                                 <span className="event-time"></span>
-                                {/* Dot divider */}
                                 <span className="w-1 h-1 rounded-full bg-gray-300"></span>
                                 <span className="event-location"></span>
                               </div>
@@ -873,6 +872,13 @@ button[variant="default"]:hover {
   background-color: rgba(250, 250, 250, 0.7);
   backdrop-filter: blur(8px);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  transition: none;
+}
+
+.event-details {
+  width: 100%;
+  text-align: left;
 }
 
 .calendar-day.has-event {
