@@ -118,7 +118,7 @@ export default function PromotorDashboard() {
                   <p className="text-xs text-muted-foreground mt-1">Mariahilfer Str. • 09:00-17:00</p>
                 </CardContent>
                 <CardFooter className="pt-0">
-                  <Button variant="outline" size="sm" className="w-full">
+                  <Button variant="outline" size="sm" className="w-full card-stat-button">
                     <Calendar className="mr-2 h-4 w-4" />
                     Details anzeigen
                   </Button>
@@ -134,7 +134,7 @@ export default function PromotorDashboard() {
                   <p className="text-xs text-muted-foreground mt-1">Verfügbarkeit für Mai</p>
                 </CardContent>
                 <CardFooter className="pt-0">
-                  <Button variant="outline" size="sm" className="w-full">
+                  <Button variant="outline" size="sm" className="w-full card-stat-button">
                     <FileText className="mr-2 h-4 w-4" />
                     Zur Übersicht
                   </Button>
@@ -155,7 +155,7 @@ export default function PromotorDashboard() {
                   </div>
                 </CardContent>
                 <CardFooter className="pt-0">
-                  <Button variant="outline" size="sm" className="w-full">
+                  <Button variant="outline" size="sm" className="w-full card-stat-button">
                     <Clock className="mr-2 h-4 w-4" />
                     Gesamte Statistik
                   </Button>
@@ -485,23 +485,17 @@ button[variant="default"]:hover {
 }
 
 /* Card footer buttons hover effect - green hover for the three main statistic buttons */
-.card .CardFooter button.w-full:hover,
-.CardFooter button.w-full:hover,
-.card-footer button.w-full:hover,
-.card button.w-full:hover {
-  background-color: rgba(5, 150, 105, 0.08);
-  border-color: rgba(5, 150, 105, 0.5);
-  color: rgb(5, 150, 105);
+.card-stat-button:hover {
+  background-color: rgba(5, 150, 105, 0.08) !important;
+  border-color: rgba(5, 150, 105, 0.5) !important;
+  color: rgb(5, 150, 105) !important;
   transform: translateY(-2px);
   transition: all 0.2s ease;
 }
 
-.card .CardFooter button.w-full:hover svg,
-.CardFooter button.w-full:hover svg,
-.card-footer button.w-full:hover svg,
-.card button.w-full:hover svg {
+.card-stat-button:hover svg {
   transform: scale(1.1);
-  color: rgb(5, 150, 105);
+  color: rgb(5, 150, 105) !important;
   transition: all 0.2s ease;
 }
 `;
