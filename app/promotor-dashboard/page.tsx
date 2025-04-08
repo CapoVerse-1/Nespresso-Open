@@ -315,6 +315,30 @@ export default function PromotorDashboard() {
                     <p className="text-sm text-muted-foreground mt-1">April 2025</p>
                   </CardHeader>
                   <CardContent className="pb-6">
+                    {/* Event Preview Panel */}
+                    <div className="event-preview-panel mb-6 border border-gray-100 rounded-lg p-4 min-h-[80px] flex items-center justify-center text-center transition-all duration-300">
+                      <div className="event-placeholder text-muted-foreground text-sm">
+                        TO-DOs werden hier dynamisch angezeigt wenn man über einen Tag mit einem To-do hovered
+                      </div>
+                      <div className="event-details hidden">
+                        <div className="event-date text-sm font-medium text-gray-500 mb-2"></div>
+                        <div className="event-info space-y-2">
+                          <div className="event-item flex items-start gap-3">
+                            <div className="event-indicator w-1 h-6 rounded-full self-start mt-1"></div>
+                            <div>
+                              <h4 className="event-title font-medium text-base"></h4>
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
+                                <span className="event-time"></span>
+                                {/* Dot divider */}
+                                <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+                                <span className="event-location"></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     {/* Calendar Grid */}
                     <div className="calendar-grid">
                       {/* Weekday Headers */}
@@ -370,30 +394,6 @@ export default function PromotorDashboard() {
                         <div className="calendar-day next-month">2</div>
                         <div className="calendar-day next-month weekend">3</div>
                         <div className="calendar-day next-month weekend">4</div>
-                      </div>
-                    </div>
-                    
-                    {/* Event Preview Panel - Modern and Minimalistic */}
-                    <div className="event-preview-panel mt-6 border border-gray-100 rounded-lg p-4 min-h-[100px] flex items-center justify-center text-center transition-all duration-300">
-                      <div className="event-placeholder text-muted-foreground text-sm">
-                        TO-DOs werden hier dynamisch angezeigt wenn man über einen Tag mit einem To-do hovered
-                      </div>
-                      <div className="event-details hidden">
-                        <div className="event-date text-sm font-medium text-gray-500 mb-2"></div>
-                        <div className="event-info space-y-2">
-                          <div className="event-item flex items-start gap-3">
-                            <div className="event-indicator w-1 h-6 rounded-full self-start mt-1"></div>
-                            <div>
-                              <h4 className="event-title font-medium text-base"></h4>
-                              <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                                <span className="event-time"></span>
-                                {/* Dot divider */}
-                                <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                                <span className="event-location"></span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </CardContent>
