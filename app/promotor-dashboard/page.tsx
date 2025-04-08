@@ -9,37 +9,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 
-// Add custom tab animation styles
-const tabAnimationStyles = `
-  /* Custom styling for the tab indicator */
-  [data-state="active"] {
-    position: relative;
-    overflow: hidden;
-  }
-
-  [data-state="active"]::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-color: rgba(16, 185, 129, 0.15); /* Emerald with opacity */
-    backdrop-filter: blur(8px);
-    border-radius: 0.5rem;
-  }
-
-  /* Animation for tab switching */
-  .tab-indicator {
-    position: absolute;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: white;
-    border-radius: 0.5rem;
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* Spring effect */
-    z-index: -2;
-  }
-`;
-
 export default function PromotorDashboard() {
   const [activeTab, setActiveTab] = useState("dashboard")
   
@@ -64,7 +33,6 @@ export default function PromotorDashboard() {
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-gray-50 relative">
       {/* Add the styles */}
       <style jsx global>{marqueeStyles}</style>
-      <style jsx global>{tabAnimationStyles}</style>
       
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
@@ -129,20 +97,13 @@ export default function PromotorDashboard() {
           </div>
         </div>
         
-        <Tabs defaultValue="dashboard" className="space-y-6" onValueChange={setActiveTab}>
-          <TabsList className="grid grid-cols-5 md:w-[500px] relative">
-            <span 
-              className="tab-indicator" 
-              style={{
-                width: `${100 / 5}%`,
-                transform: `translateX(${["dashboard", "einsatz", "equipment", "requests", "chats"].indexOf(activeTab) * 100}%)`
-              }}
-            ></span>
-            <TabsTrigger value="dashboard" className="relative z-10">Dashboard</TabsTrigger>
-            <TabsTrigger value="einsatz" className="relative z-10">Einsatz</TabsTrigger>
-            <TabsTrigger value="equipment" className="relative z-10">Equipment</TabsTrigger>
-            <TabsTrigger value="requests" className="relative z-10">Anträge</TabsTrigger>
-            <TabsTrigger value="chats" className="relative z-10">Chats</TabsTrigger>
+        <Tabs defaultValue="dashboard" className="tabs-container space-y-6" onValueChange={setActiveTab}>
+          <TabsList className="grid grid-cols-5 md:w-[500px] p-1 relative tab-animation-container">
+            <TabsTrigger value="dashboard" className="tab-trigger font-medium relative z-10">Dashboard</TabsTrigger>
+            <TabsTrigger value="einsatz" className="tab-trigger font-medium relative z-10">Einsatz</TabsTrigger>
+            <TabsTrigger value="equipment" className="tab-trigger font-medium relative z-10">Equipment</TabsTrigger>
+            <TabsTrigger value="requests" className="tab-trigger font-medium relative z-10">Anträge</TabsTrigger>
+            <TabsTrigger value="chats" className="tab-trigger font-medium relative z-10">Chats</TabsTrigger>
           </TabsList>
           
           <TabsContent value="dashboard" className="space-y-6">
@@ -375,6 +336,102 @@ const marqueeStyles = `
 
 .animate-marquee2 {
   animation: marquee2 20s linear infinite;
+}
+
+/* Custom tab indicator animation styles */
+[data-state="active"].tab-trigger {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-state="active"].tab-trigger::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: rgba(16, 185, 129, 0.18);
+  filter: blur(12px);
+  z-index: -1;
+  animation: pulseGlow 3s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% {
+    opacity: 0.7;
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(15px);
+  }
+}
+
+/* Glowing effect for active tab */
+[data-state="active"].tab-trigger::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 185, 129, 0.1);
+  z-index: -2;
+}
+
+/* Custom animation for the tab indicator */
+[role="tablist"] {
+  position: relative;
+}
+
+[role="tablist"] [data-state="active"] {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+}
+
+.tab-animation-container [data-state="active"] {
+  animation: tabBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes tabBounce {
+  0% {
+    transform: translateX(-30%);
+  }
+  60% {
+    transform: translateX(3%);
+  }
+  80% {
+    transform: translateX(-1%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Additional polish */
+.tab-trigger {
+  transition: all 0.2s ease;
+}
+
+.tab-trigger:hover:not([data-state="active"]) {
+  background-color: rgba(16, 185, 129, 0.05);
+}
+
+/* Tab switching animation */
+.tabs-switch-enter {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+.tabs-switch-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.tabs-switch-exit {
+  opacity: 1;
+}
+
+.tabs-switch-exit-active {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 200ms, transform 200ms;
 }
 `;
 
