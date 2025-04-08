@@ -416,6 +416,73 @@ const marqueeStyles = `
 .tabs-container [data-state] {
   transition: opacity 0.2s ease;
 }
+
+/* Elegant hover effects for cards */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+}
+
+/* Hover effect for buttons */
+button:not([disabled]):hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* Quick actions hover effect */
+.grid button.h-auto:hover {
+  background-color: rgba(16, 185, 129, 0.08);
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+
+.grid button.h-auto:hover svg {
+  transform: scale(1.1);
+  color: rgb(5, 150, 105);
+  transition: all 0.2s ease;
+}
+
+/* Hover effect for event items */
+.flex.items-center.justify-between:hover {
+  background-color: rgba(249, 250, 251, 0.8);
+  transform: translateX(3px);
+  transition: all 0.25s ease;
+}
+
+/* Notification hover effect */
+.flex.gap-4.items-start:hover {
+  background-color: rgba(249, 250, 251, 0.5);
+  padding: 0.5rem;
+  margin: -0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+/* Team notes hover effect */
+.rounded-lg.bg-gray-50:hover {
+  background-color: rgba(243, 244, 246, 0.8);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+/* AI Assistant button hover effect */
+.fixed.bottom-6.right-6 button:hover {
+  background-color: rgb(5, 150, 105);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Calendar hover effect */
+button[variant="default"]:hover {
+  box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
 `;
 
 // Add the style tag to inject the CSS
