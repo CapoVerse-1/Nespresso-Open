@@ -341,8 +341,8 @@ const marqueeStyles = `
 /* Custom tab indicator animation styles */
 [data-state="active"].tab-trigger {
   position: relative;
-  overflow: hidden;
-  background-color: transparent;
+  background-color: transparent !important;
+  z-index: 1;
 }
 
 /* Add a light background box to the tabs container */
@@ -360,124 +360,58 @@ const marqueeStyles = `
   align-items: center;
 }
 
+/* Active tab green indicator styles */
 [data-state="active"].tab-trigger::before {
   content: "";
   position: absolute;
-  inset: 2px;
-  background: rgba(16, 185, 129, 0.35);
-  filter: blur(12px);
+  inset: 0;
+  background-color: rgba(5, 150, 105, 0.2); /* Darker green with transparency */
+  border-radius: 0.5rem;
   z-index: -1;
-  animation: pulseGlow 3s infinite alternate;
+  transform-origin: left center;
+  animation: tabIndicatorBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes pulseGlow {
-  0% {
-    opacity: 0.7;
-    filter: blur(12px);
-  }
-  100% {
-    opacity: 1;
-    filter: blur(15px);
-  }
-}
-
-/* Additional style to prevent white flash during transitions */
+/* Basic tab styles */
 .tab-trigger {
-  transition: all 0.2s ease;
-  position: relative;
-  background-color: transparent !important;
-}
-
-/* Create a translucent background for active tabs instead of the default white */
-[data-state="active"].tab-trigger::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.65);
-  z-index: -2;
-  transition: opacity 0.2s ease;
-}
-
-/* Ensure the tab list doesn't flash during transitions */
-[role="tablist"] {
-  position: relative;
-  background-color: white;
-}
-
-/* Custom animation for the tab indicator */
-[role="tablist"] [data-state="active"] {
   transition: color 0.2s ease;
-  transform-origin: center;
-}
-
-/* Apply animation to the background element only, not the text */
-.tab-animation-container [data-state="active"] {
+  background-color: transparent !important; 
   position: relative;
+  z-index: 2;
 }
 
-.tab-animation-container [data-state="active"]::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.65);
-  z-index: -2;
-  transform-origin: left;
-  animation: tabBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  animation-fill-mode: both;
-}
-
-/* Ensure animation resets when changing tabs */
-.tab-trigger {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  will-change: transform, opacity;
-}
-
-@keyframes tabBounce {
+/* Tab indicator bounce animation */
+@keyframes tabIndicatorBounce {
   0% {
-    transform: scaleX(0.5) translateX(-10%);
-    opacity: 0.8;
+    transform: scaleX(0.7) scaleY(0.9);
+    opacity: 0.7;
   }
-  40% {
-    transform: scaleX(1.08) translateX(2%);
+  60% {
+    transform: scaleX(1.04) scaleY(1.01);
     opacity: 1;
   }
-  70% {
-    transform: scaleX(0.96) translateX(0%);
-  }
-  85% {
-    transform: scaleX(1.02) translateX(0%);
+  80% {
+    transform: scaleX(0.98) scaleY(1);
   }
   100% {
-    transform: scaleX(1) translateX(0%);
+    transform: scaleX(1) scaleY(1);
   }
 }
 
 /* Additional polish */
 .tab-trigger:hover:not([data-state="active"]) {
-  background-color: rgba(16, 185, 129, 0.05);
+  background-color: rgba(5, 150, 105, 0.05);
 }
 
-/* Tab switching animation */
-.tabs-switch-enter {
-  opacity: 0;
-  transform: translateX(10px);
+/* Tab list styles */
+[role="tablist"] {
+  position: relative;
+  overflow: visible;
 }
 
-.tabs-switch-enter-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 200ms, transform 200ms;
-}
-
-.tabs-switch-exit {
-  opacity: 1;
-}
-
-.tabs-switch-exit-active {
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: opacity 200ms, transform 200ms;
+/* Simplify tab content transitions */
+.tabs-container [data-state] {
+  transition: opacity 0.2s ease;
 }
 `;
 
