@@ -31,6 +31,9 @@ export default function PromotorDashboard() {
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-gray-50 relative">
+      {/* Add the styles */}
+      <style jsx global>{marqueeStyles}</style>
+      
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
         <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-emerald-100 opacity-30 blur-3xl"></div>
@@ -41,9 +44,14 @@ export default function PromotorDashboard() {
       {/* Breaking News Banner (conditionally displayed) */}
       <div className="bg-emerald-600 text-white py-2 overflow-hidden">
         <div className="container flex items-center">
-          <Badge variant="outline" className="bg-white text-emerald-600 mr-3 uppercase px-2 py-1 text-xs font-bold">Breaking News</Badge>
-          <div className="animate-marquee whitespace-nowrap">
-            Wichtig: Team-Meeting am Freitag um 14:00 Uhr • Neue Premium-Kaffeesorten ab nächster Woche verfügbar • Erinnerung: Zeiterfassung nicht vergessen!
+          <Badge variant="outline" className="bg-white text-emerald-600 mr-3 uppercase px-2 py-1 text-xs font-bold shrink-0">Breaking News</Badge>
+          <div className="overflow-hidden relative w-full">
+            <div className="whitespace-nowrap inline-block animate-marquee">
+              Wichtig: Team-Meeting am Freitag um 14:00 Uhr • Neue Premium-Kaffeesorten ab nächster Woche verfügbar • Erinnerung: Zeiterfassung nicht vergessen! &nbsp;&nbsp;&nbsp;
+            </div>
+            <div className="whitespace-nowrap inline-block animate-marquee2 absolute top-0">
+              Wichtig: Team-Meeting am Freitag um 14:00 Uhr • Neue Premium-Kaffeesorten ab nächster Woche verfügbar • Erinnerung: Zeiterfassung nicht vergessen! &nbsp;&nbsp;&nbsp;
+            </div>
           </div>
         </div>
       </div>
@@ -299,4 +307,31 @@ export default function PromotorDashboard() {
       </div>
     </div>
   )
+}
+
+// Add this to the global CSS or create a new CSS file for these animations
+// This can be added using a style tag since this is a client component
+const marqueeStyles = `
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee2 {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+.animate-marquee2 {
+  animation: marquee2 20s linear infinite;
+}
+`;
+
+// Add the style tag to inject the CSS
+export function BreakingNewsStyles() {
+  return <style jsx global>{marqueeStyles}</style>
 } 
