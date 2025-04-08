@@ -148,7 +148,10 @@ export default function PromotorDashboard() {
                 <CardContent>
                   <div className="text-2xl font-bold">16 / 40</div>
                   <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
-                    <div className="bg-emerald-600 h-2.5 rounded-full" style={{ width: "40%" }}></div>
+                    <div className="h-2.5 rounded-full" style={{ 
+                      width: "40%", 
+                      background: "linear-gradient(to right, rgba(167, 243, 208, 1), rgba(5, 150, 105, 1))" 
+                    }}></div>
                   </div>
                 </CardContent>
                 <CardFooter className="pt-0">
