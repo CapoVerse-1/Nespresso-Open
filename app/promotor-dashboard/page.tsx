@@ -155,7 +155,7 @@ export default function PromotorDashboard() {
                   </div>
                 </CardContent>
                 <CardFooter className="pt-0">
-                  <Button variant="ghost" size="sm" className="w-full text-muted-foreground">
+                  <Button variant="outline" size="sm" className="w-full">
                     <Clock className="mr-2 h-4 w-4" />
                     Gesamte Statistik
                   </Button>
