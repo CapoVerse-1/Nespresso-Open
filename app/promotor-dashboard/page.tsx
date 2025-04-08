@@ -483,6 +483,18 @@ button[variant="default"]:hover {
   box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
 }
+
+/* Card footer buttons hover effect - green hover for the three main statistic buttons */
+.card button.w-full:hover {
+  background-color: rgba(5, 150, 105, 0.08);
+  border-color: rgba(5, 150, 105, 0.5);
+  color: rgb(5, 150, 105);
+  transition: all 0.2s ease;
+}
+
+.card button.w-full:hover svg {
+  color: rgb(5, 150, 105);
+}
 `;
 
 // Add the style tag to inject the CSS
