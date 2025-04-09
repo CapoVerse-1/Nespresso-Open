@@ -13,7 +13,7 @@ export default function SalesCrewSignIn() {
   const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     router.push("/salescrew-dashboard")
   }
@@ -21,15 +21,15 @@ export default function SalesCrewSignIn() {
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-gray-50 relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-emerald-100 opacity-20 blur-3xl"></div>
-        <div className="absolute bottom-20 -left-40 h-96 w-96 rounded-full bg-teal-100 opacity-20 blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-coffee-100 opacity-20 blur-3xl"></div>
+        <div className="absolute bottom-20 -left-40 h-96 w-96 rounded-full bg-mocha-100 opacity-20 blur-3xl"></div>
       </div>
       <div className="container flex flex-1 items-center justify-center py-12 relative z-10">
         <Card className="mx-auto w-full max-w-md">
           <CardHeader className="space-y-1 text-center">
             <div className="flex justify-center">
               <Link href="/" className="mb-4 inline-flex items-center gap-2">
-                <Coffee className="h-6 w-6 text-emerald-600" />
+                <Coffee className="h-6 w-6 text-coffee-700" />
                 <span className="text-lg font-bold tracking-tight">Nespresso</span>
               </Link>
             </div>
@@ -44,7 +44,7 @@ export default function SalesCrewSignIn() {
                   id="email"
                   type="email"
                   placeholder="name@example.com"
-                  className="transition-all duration-200 focus:border-emerald-500 focus:ring-emerald-500"
+                  className="transition-all duration-200 focus:border-coffee-500 focus:ring-coffee-500"
                 />
               </div>
               <div className="space-y-2">
@@ -52,7 +52,7 @@ export default function SalesCrewSignIn() {
                   <Label htmlFor="password">Password</Label>
                   <Link
                     href="#"
-                    className="text-xs text-emerald-600 transition-all duration-200 hover:underline hover:text-emerald-700"
+                    className="text-xs text-coffee-600 transition-all duration-200 hover:underline hover:text-coffee-700"
                   >
                     Forgot password?
                   </Link>
@@ -62,12 +62,12 @@ export default function SalesCrewSignIn() {
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
-                    className="pr-10 transition-all duration-200 focus:border-emerald-500 focus:ring-emerald-500"
+                    className="pr-10 transition-all duration-200 focus:border-coffee-500 focus:ring-coffee-500"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-200 hover:text-emerald-600"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-200 hover:text-coffee-600"
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
@@ -77,14 +77,14 @@ export default function SalesCrewSignIn() {
             <CardFooter className="flex flex-col space-y-4">
               <Button
                 type="submit"
-                className="w-full bg-emerald-600 transition-all duration-300 hover:bg-emerald-700 hover:translate-y-[-2px] hover:shadow-md"
+                className="w-full bg-coffee-700 transition-all duration-300 hover:bg-coffee-800 hover:translate-y-[-2px] hover:shadow-md"
               >
                 Sign In
               </Button>
               <div className="text-center text-sm">
                 <Link
                   href="/"
-                  className="inline-flex items-center gap-1 text-emerald-600 transition-all duration-200 hover:underline hover:text-emerald-700 hover:gap-2"
+                  className="inline-flex items-center gap-1 text-coffee-600 transition-all duration-200 hover:underline hover:text-coffee-700 hover:gap-2"
                 >
                   <ArrowLeft className="h-3 w-3 transition-transform duration-200" />
                   Back to home
