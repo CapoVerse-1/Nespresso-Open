@@ -2,15 +2,21 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Coffee, Bell, Calendar, FileText, Users, BarChart4, MessageSquare, Settings, User, Phone } from "lucide-react"
+import { Coffee, Bell, Calendar, FileText, Users, BarChart4, MessageSquare, Settings, User, Phone, X, Send } from "lucide-react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
 
 export default function SalesCrewDashboard() {
   const [activeTab, setActiveTab] = useState("dashboard")
+  const [isChatOpen, setIsChatOpen] = useState(false)
+  const [chatMessages, setChatMessages] = useState([
+    { sender: "ai", message: "Hallo! Ich bin Ihr Nespresso-Assistent. Wie kann ich Ihnen heute helfen?" }
+  ])
+  const [newMessage, setNewMessage] = useState("")
   
   // Mock data for the dashboard
   const promotorTeam = [
@@ -32,8 +38,95 @@ export default function SalesCrewDashboard() {
     { id: 3, title: "Verfügbarkeitsanfrage von Max Müller", time: "Vor 1 Tag", read: true },
   ]
   
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen)
+  }
+
+  const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!newMessage.trim()) return
+
+    // Add user message
+    setChatMessages([...chatMessages, { sender: "user", message: newMessage }])
+    setNewMessage("")
+    
+    // Simulate AI response after a short delay
+    setTimeout(() => {
+      setChatMessages(prev => [...prev, { 
+        sender: "ai", 
+        message: "Danke für Ihre Nachricht. Unser Team wird sich bald mit Ihnen in Verbindung setzen." 
+      }])
+    }, 1000)
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
+      {/* Add the styles for the chat assistant */}
+      <style jsx global>{`
+        @keyframes pulse {
+          0% {
+            box-shadow: 0 0 0 0 rgba(125, 89, 55, 0.4);
+          }
+          70% {
+            box-shadow: 0 0 0 10px rgba(125, 89, 55, 0);
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(125, 89, 55, 0);
+          }
+        }
+        
+        .chat-button {
+          animation: pulse 2s infinite;
+        }
+        
+        .chat-window {
+          transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+          transform-origin: bottom right;
+        }
+        
+        .chat-window.hidden {
+          transform: scale(0.95);
+          opacity: 0;
+          pointer-events: none;
+        }
+        
+        .chat-window.visible {
+          transform: scale(1);
+          opacity: 1;
+        }
+        
+        .message-container {
+          max-height: 300px;
+          overflow-y: auto;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(203, 213, 225, 0.4) transparent;
+        }
+        
+        .message-container::-webkit-scrollbar {
+          width: 4px;
+        }
+        
+        .message-container::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        
+        .message-container::-webkit-scrollbar-thumb {
+          background-color: rgba(203, 213, 225, 0.4);
+          border-radius: 9999px;
+        }
+        
+        .message-ai {
+          background-color: #f8f5f1;
+          border-radius: 12px 12px 12px 0;
+        }
+        
+        .message-user {
+          background-color: #7d5937;
+          color: white;
+          border-radius: 12px 12px 0 12px;
+        }
+      `}</style>
+      
       <header className="bg-white border-b shadow-sm sticky top-0 z-30">
         <div className="container flex h-16 items-center justify-between px-4 md:px-6">
           <Link href="/" className="flex items-center gap-2">
@@ -239,10 +332,54 @@ export default function SalesCrewDashboard() {
         </Tabs>
       </main>
       
-      {/* AI Assistant Button (Fixed) */}
-      <div className="fixed bottom-6 right-6">
-        <Button className="h-12 w-12 rounded-full bg-emerald-600 hover:bg-emerald-700" size="icon">
-          <MessageSquare className="h-6 w-6" />
+      {/* AI Chat Assistant */}
+      <div className="fixed bottom-6 right-6 z-50">
+        {/* Chat Window */}
+        <div className={`chat-window ${isChatOpen ? 'visible' : 'hidden'} w-80 md:w-96 bg-white rounded-2xl shadow-lg overflow-hidden mb-4`}>
+          {/* Chat Header */}
+          <div className="bg-coffee-700 text-white p-4 flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <Coffee className="h-5 w-5" />
+              <h3 className="font-medium">Nespresso Assistant</h3>
+            </div>
+            <button 
+              onClick={toggleChat}
+              className="text-white/80 hover:text-white transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+          
+          {/* Chat Messages */}
+          <div className="p-4 message-container">
+            {chatMessages.map((msg, index) => (
+              <div key={index} className={`mb-3 max-w-[80%] ${msg.sender === "ai" ? "message-ai ml-0" : "message-user ml-auto"} p-3`}>
+                {msg.message}
+              </div>
+            ))}
+          </div>
+          
+          {/* Chat Input */}
+          <form onSubmit={handleSendMessage} className="border-t p-3 flex gap-2">
+            <Input 
+              placeholder="Schreiben Sie eine Nachricht..."
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              className="flex-1 focus-visible:ring-coffee-500"
+            />
+            <Button type="submit" size="icon" className="bg-coffee-700 hover:bg-coffee-800">
+              <Send className="h-4 w-4" />
+            </Button>
+          </form>
+        </div>
+        
+        {/* Chat Button */}
+        <Button 
+          onClick={toggleChat}
+          className={`h-14 w-14 rounded-full bg-coffee-700 hover:bg-coffee-800 chat-button ${isChatOpen ? 'animate-none' : ''}`} 
+          size="icon"
+        >
+          <Coffee className="h-6 w-6" />
         </Button>
       </div>
     </div>
