@@ -37,7 +37,7 @@ export default function SalesCrewDashboard() {
       <header className="bg-white border-b shadow-sm sticky top-0 z-30">
         <div className="container flex h-16 items-center justify-between px-4 md:px-6">
           <Link href="/" className="flex items-center gap-2">
-            <Coffee className="h-6 w-6 text-emerald-600" />
+            <Coffee className="h-6 w-6 text-coffee-700" />
             <span className="text-lg font-bold tracking-tight">Nespresso</span>
           </Link>
           <div className="flex items-center gap-4">

@@ -65,15 +65,15 @@ export default function LandingPage() {
       </div>
       <header className="container z-10 flex h-20 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <Coffee className="h-8 w-8" style={{ color: 'rgba(5, 150, 105, 0.8)' }} />
+          <Coffee className="h-8 w-8 text-coffee-700" />
           <span className="text-xl font-bold tracking-tight">Nespresso</span>
         </Link>
       </header>
       <main className="flex-1">
         <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-          <div className="flex max-w-[980px] flex-col items-center gap-4 text-center">
+          <div className="flex w-full flex-col items-center gap-4 text-center">
             <h1 className="text-4xl font-bold leading-tight tracking-tighter md:text-5xl lg:text-6xl">
-              Welcome to <span className="bg-gradient-to-r from-emerald-600 to-coffee-700 bg-clip-text text-transparent">Nespresso</span>
+              Welcome to <span className="bg-gradient-to-r from-coffee-600 to-coffee-800 bg-clip-text text-transparent">Nespresso</span>
             </h1>
             <p className="max-w-[700px] text-lg text-muted-foreground md:text-xl">
               Your all-in-one platform for seamless communication and workflow management
