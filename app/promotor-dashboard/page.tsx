@@ -587,7 +587,7 @@ export default function PromotorDashboard() {
       {/* AI Chat Assistant */}
       <div className="fixed bottom-6 right-6 z-50">
         {/* Chat Window */}
-        <div className={`chat-window ${isChatOpen ? 'visible' : 'hidden'} w-80 md:w-96 bg-white rounded-2xl shadow-lg overflow-hidden mb-4`}>
+        <div className={`chat-window ${isChatOpen ? 'visible' : 'hidden'} w-64 md:w-72 h-[500px] bg-white rounded-2xl shadow-lg overflow-hidden absolute bottom-20 right-0`}>
           {/* Chat Header */}
           <div className="bg-coffee-700 text-white p-4 flex justify-between items-center">
             <div className="flex items-center gap-2">
@@ -603,7 +603,7 @@ export default function PromotorDashboard() {
           </div>
           
           {/* Chat Messages */}
-          <div className="p-4 message-container">
+          <div className="p-4 message-container flex-1 h-[380px]">
             {chatMessages.map((msg, index) => (
               <div key={index} className={`mb-3 max-w-[80%] ${msg.sender === "ai" ? "message-ai ml-0" : "message-user ml-auto"} p-3`}>
                 {msg.message}
@@ -628,7 +628,7 @@ export default function PromotorDashboard() {
         {/* Chat Button */}
         <Button 
           onClick={toggleChat}
-          className={`h-14 w-14 rounded-full bg-coffee-700 hover:bg-coffee-800 chat-button ${isChatOpen ? 'animate-none' : ''}`} 
+          className="h-14 w-14 rounded-full bg-coffee-700 hover:bg-coffee-800 chat-button"
           size="icon"
         >
           <Coffee className="h-6 w-6" />
